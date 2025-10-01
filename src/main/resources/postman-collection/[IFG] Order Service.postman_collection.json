@@ -216,6 +216,187 @@
 			"name": "Checkout (Workflow)",
 			"item": [
 				{
+					"name": "Sample",
+					"item": [
+						{
+							"name": "Checkout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createOrderDto\": {\n        \"email\": \"alice@example.com\",\n        \"items\": [\n            {\n                \"productName\": \"Baju\",\n                \"quantity\": 1,\n                \"price\": 95000000\n            },\n            {\n                \"productName\": \"BBola\",\n                \"quantity\": 2,\n                \"price\": 250000\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/checkout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Task ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/checkout/aae3d8c5-4ed6-4c2d-b679-9300c6609e17/tasks?user=Customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout",
+										"aae3d8c5-4ed6-4c2d-b679-9300c6609e17",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "user",
+											"value": "Customer"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actor Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\": {\r\n        \"id\": 12,\r\n        \"address\": null,\r\n        \"status\": \"INITIATED\",\r\n        \"user\": {\r\n            \"id\": 1,\r\n            \"email\": \"alice@example.com\",\r\n            \"pin\": \"1234\"\r\n        }\r\n    },\r\n    \"address\": \"Jl Sudirman\"\r\n    // \"results\": {\r\n    //     \"address\": \"Jl Sudirman\"\r\n    // }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/checkout/aae3d8c5-4ed6-4c2d-b679-9300c6609e17/Task/8be3b073-944d-407a-acd7-f791f143df35?user=Customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout",
+										"aae3d8c5-4ed6-4c2d-b679-9300c6609e17",
+										"Task",
+										"8be3b073-944d-407a-acd7-f791f143df35"
+									],
+									"query": [
+										{
+											"key": "user",
+											"value": "Customer"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actor Confirm",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\": {\r\n        \"id\": 12,\r\n        \"address\": \"Jl Sudirman\",\r\n        \"status\": \"INITIATED\",\r\n        \"user\": {\r\n            \"id\": 1,\r\n            \"email\": \"alice@example.com\",\r\n            \"pin\": \"1234\"\r\n        }\r\n    },\r\n    \"address\": \"Jl Sudirman\",\r\n    \"confirm\": true\r\n    // \"results\": {\r\n    //     \"confirm\": true,\r\n    //     \"address\": \"Jl Sudirman\"\r\n    // }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/checkout/aae3d8c5-4ed6-4c2d-b679-9300c6609e17/Task/8d636517-d207-4dd7-aaed-d062f190d70f?user=Customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout",
+										"aae3d8c5-4ed6-4c2d-b679-9300c6609e17",
+										"Task",
+										"8d636517-d207-4dd7-aaed-d062f190d70f"
+									],
+									"query": [
+										{
+											"key": "user",
+											"value": "Customer"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actor Input PIN",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\": {\r\n        \"id\": 12,\r\n        \"address\": \"Jl Sudirman\",\r\n        \"status\": \"INITIATED\",\r\n        \"user\": {\r\n            \"id\": 1,\r\n            \"email\": \"alice@example.com\",\r\n            \"pin\": \"1234\"\r\n        }\r\n    },\r\n    \"address\": \"Jl Sudirman\",\r\n    \"confirm\": true,\r\n    \"pin\": \"1234\"\r\n    // \"results\": {\r\n    //     \"confirm\": true,\r\n    //     \"address\": \"Jl Sudirman\",\r\n    //     \"pin\": \"1234\"\r\n    // }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/checkout/aae3d8c5-4ed6-4c2d-b679-9300c6609e17/Task/de0abdf8-21f5-45dc-ad71-93edd176d23b?user=Customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout",
+										"aae3d8c5-4ed6-4c2d-b679-9300c6609e17",
+										"Task",
+										"de0abdf8-21f5-45dc-ad71-93edd176d23b"
+									],
+									"query": [
+										{
+											"key": "user",
+											"value": "Customer"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Create Checkout",
 					"request": {
 						"method": "POST",
