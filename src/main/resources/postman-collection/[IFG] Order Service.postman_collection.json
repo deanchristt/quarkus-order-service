@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "3d2057f9-db2d-4998-b662-6d20215babf3",
+		"name": "[IFG] Order Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21271865"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"bob@example.com\",\n  \"items\": [\n    {\n      \"productName\": \"Laptop\",\n      \"quantity\": 1,\n      \"price\": 1500\n    },\n    {\n      \"productName\": \"Mouse\",\n      \"quantity\": 2,\n      \"price\": 50\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shipping Address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/address?address=Jl.Merdeka",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"address"
+							],
+							"query": [
+								{
+									"key": "address",
+									"value": "Jl.Merdeka"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shipping Address Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Process Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/process-payment?pin=123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"process-payment"
+							],
+							"query": [
+								{
+									"key": "pin",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Ship",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/ship",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"ship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Complete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/complete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checkout (Workflow)",
+			"item": [
+				{
+					"name": "Create Checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"createOrderDto\": {\n        \"email\": \"alice@example.com\",\n        \"items\": [\n            {\n                \"productName\": \"Baju\",\n                \"quantity\": 1,\n                \"price\": 95000000\n            },\n            {\n                \"productName\": \"BBola\",\n                \"quantity\": 2,\n                \"price\": 250000\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/checkout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Create Checkout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createOrderDto\": {\n        \"email\": \"alice@example.com\",\n        \"items\": [\n            {\n                \"productName\": \"Baju\",\n                \"quantity\": 1,\n                \"price\": 95000000\n            },\n            {\n                \"productName\": \"BBola\",\n                \"quantity\": 2,\n                \"price\": 250000\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/checkout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"checkout"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:8080/checkout/c45732c6-9c63-40f8-9cc9-0a6ec8a16f21"
+								},
+								{
+									"key": "content-length",
+									"value": "242"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"c45732c6-9c63-40f8-9cc9-0a6ec8a16f21\",\n    \"confirm\": null,\n    \"address\": null,\n    \"pin\": null,\n    \"orderId\": null,\n    \"email\": null,\n    \"order\": {\n        \"id\": 35,\n        \"address\": null,\n        \"status\": \"INITIATED\",\n        \"user\": {\n            \"id\": 3,\n            \"email\": \"alice@example.com\",\n            \"pin\": \"1234\"\n        }\n    },\n    \"isCorrect\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get TaskId by WorkflowInstance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/checkout/{{workflowInstance}}tasks?user=Customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"checkout",
+								"{{workflowInstance}}tasks"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "Customer"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task User Shipping Address Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"Jl Sudirman\", \n  \"order\": {\n    \"id\": 31,                    // ⚠️ Sesuaikan dengan orderId yang di-generate di STEP 1 (createOrder)\n    \"address\": \"Jl Sudirman\",    // ✅ Bisa disesuaikan sesuai alamat pengiriman\n    \"status\": \"INITIATED\",       // ⚠️ Biasanya otomatis di-set di backend; tidak perlu diubah kecuali testing spesifik\n    \"user\": {\n      \"id\": 3,                    // ⚠️ Sesuaikan dengan userId/customer yang membuat order\n      \"email\": \"alice@example.com\", // ⚠️ Opsional, biasanya diambil dari DB berdasarkan userId\n      \"pin\": \"1234\"               // ⚠️ Hanya perlu kalau step ini untuk konfirmasi PIN / process-payment\n    }\n  }\n  \n  // TODO: Sesuaikan field lain berdasarkan taskId atau step workflow:\n  //   - Jika STEP = updateAddress → focus pada \"address\" & \"order.id\"\n  //   - Jika STEP = confirmPayment → pastikan \"user.pin\" tersedia\n  //   - Jika STEP = processPayment → \"pin\" bisa di-query dari user atau input parameter\n  //   - Jika STEP = shipOrder / completeOrder → cukup \"order.id\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/checkout/{{workflowInstanceId}}/Task/{{taskId}}?user=Customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"checkout",
+								"{{workflowInstanceId}}",
+								"Task",
+								"{{taskId}}"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "Customer"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

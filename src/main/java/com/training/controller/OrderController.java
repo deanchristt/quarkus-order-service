@@ -17,14 +17,12 @@ public class OrderController {
     @Inject
     OrderService orderService;
 
-    // STEP 1: Buat order baru (customerName + list produk)
     @POST
     public Response createOrder(CreateOrderDto dto) {
         Order order = orderService.createOrder(dto);
         return Response.ok(order).build();
     }
 
-    // STEP 2: Input alamat pengiriman
     @PUT
     @Path("/address")
     public Response updateAddress(Order order,
@@ -33,7 +31,6 @@ public class OrderController {
         return Response.ok(updated).build();
     }
 
-    // STEP 3: Konfirmasi PIN pembayaran
     @PUT
     @Path("/payment")
     public Response confirmPayment(Order order) {
@@ -41,7 +38,6 @@ public class OrderController {
         return Response.ok(updated).build();
     }
 
-    // STEP 4: Proses pembayaran
     @POST
     @Path("/process-payment")
     public Response processPayment(Order order,
@@ -50,7 +46,6 @@ public class OrderController {
         return Response.ok(updated).build();
     }
 
-    // STEP 5: Kirim order
     @POST
     @Path("/ship")
     public Response shipOrder(Order order) {
@@ -58,7 +53,6 @@ public class OrderController {
         return Response.ok(updated).build();
     }
 
-    // STEP 6: Selesaikan order
     @POST
     @Path("/complete")
     public Response completeOrder(Order order) {
