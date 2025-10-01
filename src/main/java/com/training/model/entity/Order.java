@@ -1,12 +1,16 @@
 package com.training.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order extends PanacheEntityBase {
 
     @Id
@@ -15,8 +19,7 @@ public class Order extends PanacheEntityBase {
 
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,11 +45,11 @@ public class Order extends PanacheEntityBase {
         this.address = address;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

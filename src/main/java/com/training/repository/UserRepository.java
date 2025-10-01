@@ -2,7 +2,7 @@ package com.training.repository;
 
 import com.training.model.entity.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import jakarta.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepositoryBase<User, Long> {

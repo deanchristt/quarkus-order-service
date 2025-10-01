@@ -1,7 +1,7 @@
 package com.training.model.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "order_items")
@@ -11,8 +11,23 @@ public class OrderItem extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_name")
     private String productName;
     private int quantity;
+
+    private double price;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     @ManyToOne
     @JoinColumn(name = "order_id")

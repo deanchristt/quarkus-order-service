@@ -1,14 +1,13 @@
 package com.training.controller;
 
+import com.training.model.dto.CreateOrderDto;
 import com.training.model.entity.Order;
-import com.training.model.entity.OrderItem;
 import com.training.service.OrderService;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
-import java.util.List;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,9 +19,8 @@ public class OrderController {
 
     // STEP 1: Buat order baru (customerName + list produk)
     @POST
-    public Response createOrder(@QueryParam("customerName") String customerName,
-                                List<OrderItem> items) {
-        Order order = orderService.createOrder(customerName, items);
+    public Response createOrder(CreateOrderDto dto) {
+        Order order = orderService.createOrder(dto);
         return Response.ok(order).build();
     }
 

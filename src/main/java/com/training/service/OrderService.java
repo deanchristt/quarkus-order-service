@@ -1,6 +1,7 @@
 package com.training.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.training.model.dto.CreateOrderDto;
 import com.training.model.entity.Order;
 import com.training.model.entity.OrderItem;
 import com.training.model.entity.User;
@@ -9,11 +10,11 @@ import com.training.repository.UserRepository;
 import io.smallrye.reactive.messaging.annotations.Channel;
 import io.smallrye.reactive.messaging.annotations.Emitter;
 import io.vertx.mutiny.redis.client.RedisAPI;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -38,15 +39,15 @@ public class OrderService {
 
     // STEP 1: Create order
     @Transactional
-    public Order createOrder(String email, List<OrderItem> items) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) throw new RuntimeException("User not found: " + email);
+    public Order createOrder(CreateOrderDto dto) {
+        User user = userRepository.findByEmail(dto.getEmail());
+        if (user == null) throw new RuntimeException("User not found: " + dto.getEmail());
 
         Order order = new Order();
         order.setUser(user);
-        order.setStatus(Order.Status.INITIATED);
+        order.setStatus(Order.Status.INITIATED.name());
 
-        for (OrderItem item : items) order.addItem(item);
+        for (OrderItem item : dto.getItems()) order.addItem(item);
 
         orderRepository.persist(order);
 
@@ -63,7 +64,7 @@ public class OrderService {
         if (orderData == null) throw new RuntimeException("Order not found: " + order.getId());
 
         orderData.setAddress(address);
-        orderData.setStatus(Order.Status.ADDRESS_FILLED);
+        orderData.setStatus(Order.Status.ADDRESS_FILLED.name());
 
         pushToKafka(orderData);
         pushToRedis(orderData);
@@ -77,7 +78,7 @@ public class OrderService {
         Order orderData = orderRepository.findById(order.getId());
         if (orderData == null) throw new RuntimeException("Order not found: " + order.getId());
 
-        orderData.setStatus(Order.Status.PAYMENT_PENDING);
+        orderData.setStatus(Order.Status.PAYMENT_PENDING.name());
 
         pushToKafka(orderData);
         pushToRedis(orderData);
@@ -104,7 +105,7 @@ public class OrderService {
         Order orderData = orderRepository.findById(order.getId());
 
         if (valid) {
-            orderData.setStatus(Order.Status.PAYMENT_CONFIRMED);
+            orderData.setStatus(Order.Status.PAYMENT_CONFIRMED.name());
         } else {
             throw new RuntimeException("Invalid PIN");
         }
@@ -121,7 +122,7 @@ public class OrderService {
         Order orderData = orderRepository.findById(order.getId());
         if (orderData == null) throw new RuntimeException("Order not found: " + order.getId());
 
-        orderData.setStatus(Order.Status.SHIPPED);
+        orderData.setStatus(Order.Status.SHIPPED.name());
 
         pushToKafka(orderData);
         pushToRedis(orderData);
@@ -135,7 +136,7 @@ public class OrderService {
         Order orderData = orderRepository.findById(order.getId());
         if (orderData == null) throw new RuntimeException("Order not found: " + order.getId());
 
-        orderData.setStatus(Order.Status.COMPLETED);
+        orderData.setStatus(Order.Status.COMPLETED.name());
 
         pushToKafka(orderData);
         pushToRedis(orderData);
