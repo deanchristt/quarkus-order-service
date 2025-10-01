@@ -275,3 +275,13 @@ User -> OrderService -> DB + Kafka + Redis -> OrderConsumer -> DB
 ---
 
 **✅ With this setup, you can run the full local environment and test the OrderService end-to-end.**
+
+### 9️⃣ Testing Local via API (curl or Postman)
+
+Semua endpoint untuk OrderService sudah tersedia dalam Postman Collection.
+```
+/src/main/resources/postman-collection/[IFG] Order Service.postman_collection.json
+```
+
+
+
